@@ -173,7 +173,7 @@ function oMenu.addSlider(name, value, guiObject, default, minValue, maxValue)
         renderText(x, y, color.new(255, 255, 255, 255), name, fonts.menufont, 0, 1)
     end
 
-    local color = oMenu.percentageColor(color.new(25, 255, 25, 255), color.new(255, 25, 25, 255), (oMenu["VARS"][value]:get_value()-minValue)/(maxValue-minValue))
+    local color = oMenu.percentageColor(color.new(255, 25, 25, 255), color.new(25, 255, 25, 255), (oMenu["VARS"][value]:get_value()-minValue)/(maxValue-minValue))
     renderText(x+150, y, color, tostring(oMenu["VARS"][value]:get_value()), fonts.menufont, 1, 1)
 
     oMenu["COLUMNSINROW"][oMenu["ROW"]] = oMenu["COLUMN"]
