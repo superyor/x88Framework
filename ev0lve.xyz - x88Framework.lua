@@ -172,6 +172,8 @@ function oMenu.addSlider(name, value, guiObject, default, minValue, maxValue)
 end
 
 --- An multiSwitch, basically a multibox
+--- DO NOT USE THIS, THIS IS CURRENTLY NOT WORKING!!!!!!!!!!!!!
+--[[
 function oMenu.addMultiSwitch(name, value, guiObject, default, optionsTable)
     if oMenu["VARS"][value] == nil then
         oMenu["VARS"][value] = guiObject;
@@ -207,9 +209,9 @@ function oMenu.addMultiSwitch(name, value, guiObject, default, optionsTable)
         end
     end
 
-    oMenu["COLUMNSINROW"][oMenu["ROW"]] = oMenu["COLUMN"]
+    oMenu["COLUMNSINROW"][oMenu["ROW"]] --[[= oMenu["COLUMN"]
     oMenu["ROW"] = oMenu["ROW"] + 1;
-end
+end]]
 
 --- Start a new column in the menu
 function oMenu.nextColumn()
