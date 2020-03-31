@@ -83,7 +83,7 @@ local oMenu = {
 }
 
 --- Font creation
-renderer.new_font("menufont", "Tahoma", 50, 500, fontflags.outline)
+renderer.new_font("menufont", "Tahoma", 13, 500, fontflags.outline)
 
 --- API Localization
 local getKeyState = input_handler.is_key_pressed;
@@ -106,6 +106,16 @@ function oMenu.tableLength()
     local count = 0
     for kek in pairs(table) do count = count + 1 end
     return count
+end
+
+function oMenu.percentageColor(color1, color2, percent)
+    if percent > 1 then
+        percent = 1
+    elseif percent < 0 then
+        percent = 0
+    end
+    local r, g, b = color1.r-(color1.r-color2.r)*percent, color1.g-(color1.g-color2.g)*percent, color1.b-(color1.b-color2.b)*percent
+    return color.new(math.floor(r), math.floor(g), math.floor(b), 255)
 end
 
 --- Add a boolswitch, basically a checkbox.
@@ -163,9 +173,8 @@ function oMenu.addSlider(name, value, guiObject, default, minValue, maxValue)
         renderText(x, y, color.new(255, 255, 255, 255), name, fonts.menufont, 0, 1)
     end
 
-    local g = (math.floor(255*((oMenu["VARS"][value]:get_value()-minValue)/(maxValue-minValue))));
-    local r = 255 - g;
-    renderText(x+150, y, color.new(r, g, 25, 255), tostring(oMenu["VARS"][value]:get_value()), fonts.menufont, 1, 1)
+    local color = oMenu.percentageColor(color.new(25, 255, 25, 255), color.new(255, 25, 25, 255), (oMenu["VARS"][value]:get_value()-minValue)/(maxValue-minValue))
+    renderText(x+150, y, color, tostring(oMenu["VARS"][value]:get_value()), fonts.menufont, 1, 1)
 
     oMenu["COLUMNSINROW"][oMenu["ROW"]] = oMenu["COLUMN"]
     oMenu["ROW"] = oMenu["ROW"] + 1;
